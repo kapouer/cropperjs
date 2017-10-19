@@ -179,11 +179,11 @@ export default {
         if (cropped && this.limited) {
           canvasData.minLeft = Math.min(
             cropBoxData.left,
-            cropBoxData.left + (cropBoxData.width - canvasData.width),
+            cropBoxData.left + (cropBoxData.width - canvasData.width / this.imageData.scaleX),
           );
           canvasData.minTop = Math.min(
             cropBoxData.top,
-            cropBoxData.top + (cropBoxData.height - canvasData.height),
+            cropBoxData.top + (cropBoxData.height - canvasData.height / this.imageData.scaleY),
           );
           canvasData.maxLeft = cropBoxData.left;
           canvasData.maxTop = cropBoxData.top;
@@ -214,9 +214,9 @@ export default {
 
     if (transformed) {
       const { width: naturalWidth, height: naturalHeight } = getRotatedSizes({
-        width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
-        height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
-        degree: imageData.rotate || 0,
+        width: imageData.naturalWidth * Math.abs(imageData.scaleX),
+        height: imageData.naturalHeight * Math.abs(imageData.scaleY),
+        degree: imageData.rotate,
       });
       const width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
       const height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
